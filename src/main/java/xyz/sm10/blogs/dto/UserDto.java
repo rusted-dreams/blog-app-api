@@ -1,12 +1,11 @@
 package xyz.sm10.blogs.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class UserDto {
     private int id;
     private String name;

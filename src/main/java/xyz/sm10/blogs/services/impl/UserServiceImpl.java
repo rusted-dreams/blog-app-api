@@ -27,7 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Integer UserId) {
-        return null;
+        User user = userRepo.findById(UserId)
+                .orElseThrow(() -> new RuntimeException("user not found with id " + UserId));
+        return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getBio()); // we can do this using model mapper later.
     }
 
     @Override
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
         return users
                 .stream()
-                .map(user -> new UserDto(
+                .map(user -> new UserDto( // we will later do this using model mapper
                         user.getId(),
                         user.getName(),
                         user.getEmail(),
