@@ -1,6 +1,7 @@
 package xyz.sm10.blogs.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import xyz.sm10.blogs.dto.UserDto;
 import xyz.sm10.blogs.entities.User;
@@ -8,16 +9,30 @@ import xyz.sm10.blogs.repositories.UserRepo;
 import xyz.sm10.blogs.services.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepo userRepo;
+    private final ModelMapper modelMapper;
 
     @Override
-    public UserDto createUser(UserDto User) {
-        return null;
+    public UserDto createUser(UserDto newUser) {
+        // check if user already exists:
+        boolean exists = userRepo.existsByEmail(newUser.getEmail());
+        if (exists) {
+            throw new RuntimeException("User already exists with email: " + newUser.getEmail());
+        }
+
+        // convert DTO --> entity
+        User usr = modelMapper.map(newUser, User.class);
+
+        User savedUser = userRepo.save(usr);
+
+        //convert entity --> DTO
+        return modelMapper.map(savedUser, UserDto.class);
     }
 
     @Override

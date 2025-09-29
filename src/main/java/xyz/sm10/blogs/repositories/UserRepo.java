@@ -7,5 +7,5 @@ import xyz.sm10.blogs.entities.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
-    
+    boolean existsByEmail(String email);
 }
