@@ -15,12 +15,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorDetailsDto> handleResourceNotFound(ResourceNotFoundException ex, WebRequest request) {
         ErrorDetailsDto err = new ErrorDetailsDto(
-                LocalDateTime.now(),
+                false,
                 ex.getMessage(),
                 request.getDescription(false),
                 ex.getResource(),
                 ex.getField(),
-                ex.getValue()
+                ex.getValue(),
+                LocalDateTime.now()
                 );
         return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
     }
@@ -29,12 +30,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetailsDto> handleAllExceptions(Exception ex, WebRequest request){
         ErrorDetailsDto err = new ErrorDetailsDto(
-                LocalDateTime.now(),
+                false,
                 ex.getMessage(),
                 request.getDescription(false),
                 null,
                 null,
-                null
+                null,
+                LocalDateTime.now()
         );
         return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }

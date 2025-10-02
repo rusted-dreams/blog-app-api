@@ -8,10 +8,11 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 public class ErrorDetailsDto {
-    private LocalDateTime timestamp;
+    private boolean success;
     private String message;
-    private String details;
+    private String path;
     private String resource;
     private String field;
     private Object value;
+    private LocalDateTime timestamp;
 }
