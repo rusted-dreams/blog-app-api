@@ -1,32 +1,33 @@
 package xyz.sm10.blogs.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.stereotype.Indexed;
 
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Blog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String title;
     private String content;
 
-    private String author;
-    private LocalDateTime createdAt;
-    private Boolean isPublic;
-    private String category;
-
+    @ManyToOne
+    @JoinColumn(name= "authorId", nullable = false)
+    private User author;
+    private Boolean isPublished;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+    private LocalDate createdAt;
 }

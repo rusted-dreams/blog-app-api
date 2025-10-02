@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import xyz.sm10.blogs.dto.UserDto;
 import xyz.sm10.blogs.entities.User;
+import xyz.sm10.blogs.exceptions.ResourceNotFoundException;
 import xyz.sm10.blogs.repositories.UserRepo;
 import xyz.sm10.blogs.services.UserService;
 
@@ -65,7 +66,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Integer UserId) {
-
+    public void deleteUser(Integer uid) {
+        User exists = userRepo.findById(uid)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id", uid));
+        userRepo.deleteById(uid);
+        return;
     }
 }

@@ -32,5 +32,10 @@ public class UserController {
         UserDto createdUser = userService.createUser(newUser);
         return "New user registered successfully with id:" + createdUser.getId();
     }
+
+    @DeleteMapping("/{uid}")
+    public void deleteUser(@PathVariable Integer uid) {
+        userService.deleteUser(uid);
+    }
     
 }

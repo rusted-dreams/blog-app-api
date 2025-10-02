@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.modelmapper.internal.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 @Entity
 @NoArgsConstructor
@@ -17,8 +16,8 @@ public class Category {
     private Integer categoryId;
 
     @Column(name = "title", nullable = false)
-    private String Title;
+    private String title;
 
     @Column(name = "description")
-    private String Description;
+    private String description;
 }

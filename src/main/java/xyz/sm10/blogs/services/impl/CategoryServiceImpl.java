@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import xyz.sm10.blogs.dto.CategoryDto;
 import xyz.sm10.blogs.entities.Category;
+import xyz.sm10.blogs.exceptions.ResourceNotFoundException;
 import xyz.sm10.blogs.repositories.CategoryRepo;
 import xyz.sm10.blogs.services.CategoryService;
 
@@ -37,7 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(Integer cid) {
         Category exists = categoryRepo.findById(cid)
-                .orElseThrow(() -> new RuntimeException("Category dosen't exist"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", String.valueOf(cid)));
     }
 
     @Override
