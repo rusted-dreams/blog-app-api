@@ -7,8 +7,9 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class ErrorDetailsDto {
+public class ErrorResponseDto {
     private boolean success;
+    private Integer status;
     private String message;
     private String path;
     private String resource;

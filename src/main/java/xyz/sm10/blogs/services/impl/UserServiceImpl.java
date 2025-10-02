@@ -42,9 +42,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(Integer UserId) {
-        User user = userRepo.findById(UserId)
-                .orElseThrow(() -> new RuntimeException("user not found with id " + UserId));
+    public UserDto getUserById(Integer uid) {
+        User user = userRepo.findById(uid)
+                .orElseThrow(() -> new ResourceNotFoundException("user", "id", uid));
         return new UserDto(user.getId(), user.getName(), user.getEmail(), user.getPassword(), user.getBio()); // we can do this using model mapper later.
     }
 
