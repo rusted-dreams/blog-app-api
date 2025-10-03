@@ -1,5 +1,6 @@
 package xyz.sm10.blogs.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xyz.sm10.blogs.dto.UserDto;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String postMethodName(@RequestBody UserDto newUser) {
+    public String postMethodName(@Valid @RequestBody UserDto newUser) {
         UserDto createdUser = userService.createUser(newUser);
         return "New user registered successfully with id:" + createdUser.getId();
     }
