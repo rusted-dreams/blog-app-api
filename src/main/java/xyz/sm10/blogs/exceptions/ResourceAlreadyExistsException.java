@@ -14,6 +14,6 @@ public class ResourceAlreadyExistsException extends RuntimeException{
 
     @Override
     public String getMessage() {
-        return String.format("%s with %s : %s already exist", resource, field, value);
+        return String.format("%s with %s  \"%s\" already exist", resource, field, value);
     }
 }

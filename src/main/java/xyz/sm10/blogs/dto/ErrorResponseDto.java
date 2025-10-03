@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 public class ErrorResponseDto {
+    private LocalDateTime timestamp;
     private boolean success;
     private Integer status;
     private String message;
@@ -15,5 +16,4 @@ public class ErrorResponseDto {
     private String resource;
     private String field;
     private Object value;
-    private LocalDateTime timestamp;
 }

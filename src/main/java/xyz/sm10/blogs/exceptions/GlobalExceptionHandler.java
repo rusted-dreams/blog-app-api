@@ -18,16 +18,32 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponseDto> handleResourceNotFound(ResourceNotFoundException ex, WebRequest request) {
         ErrorResponseDto err = new ErrorResponseDto(
+                LocalDateTime.now(),
                 false,
                 404,
                 ex.getMessage(),
                 request.getDescription(false),
                 ex.getResource(),
                 ex.getField(),
-                ex.getValue(),
-                LocalDateTime.now()
+                ex.getValue()
                 );
         return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public ResponseEntity<?> handleResourceAlreadyExistException(ResourceAlreadyExistsException ex, WebRequest request) {
+        ErrorResponseDto err = new ErrorResponseDto(
+                LocalDateTime.now(),
+                false,
+                400,
+                ex.getMessage(),
+                request.getDescription(false),
+                ex.getResource(),
+                ex.getField(),
+                ex.getValue()
+        );
+
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 
     // failed validation error:
