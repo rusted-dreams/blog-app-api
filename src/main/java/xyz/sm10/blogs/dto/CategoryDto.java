@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 public class CategoryDto {
-    private Integer cid;
+    private Integer categoryId;
     @NotBlank
     private String Title;
     private String Description;
